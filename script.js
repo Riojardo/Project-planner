@@ -45,7 +45,7 @@ function add_to_list () {
   document.querySelector("div.to_do").appendChild(div_input);
 }*/
 
-
+// creation task
 let task_title = document.getElementsById('todo');
 let task_date = document.getElementById('todo_date');
 let task_description = document.getElementById('todo_description');
@@ -73,6 +73,27 @@ function add_to_list () {
     ); 
 };
 
-document.querySelector(".edit-btn").addEventListener('click', () => {
+// edit btn
+let editBtn = document.querySelector(".edit-btn")
+editBtn.addEventListener('click', () => {
+    let edit_task = getElementById("edit");
+    edit_task.contentEditable = true;
+});
 
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter'){
+        edit_task.contentEditable = false;
+    }
 })
+
+// delete btn
+let deleteBtn = document.querySelector('.delete-btn')
+deleteBtn.addEventListener("click", () => {
+    const index = new_task.indexOf();
+    if (index !== -1){
+        new_task.slice(index, 1);
+        document.querySelector('.tasks').remove();
+    }
+});
+
+
