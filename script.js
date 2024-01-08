@@ -96,4 +96,14 @@ deleteBtn.addEventListener("click", () => {
     }
 });
 
-
+// reminder 
+let task_remind = task_date.value
+function reminder (task_remind) {
+   let now = new Date()
+   let two_week_before = new Date(task_remind.getTime()-(1000*60*60*24*14));
+   let time = two_week_before.getTime() - now.getTime();
+   
+   
+   setTimeout(function(){ alert(`Still two weeks to do this task !`)}, time);
+};
+reminder(task_remind);
