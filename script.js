@@ -26,7 +26,7 @@ function create_task() {
   button.className = "button_task";
   button.type = "button";
   button.textContent = "I'm a button, click on me! UWU";
-  button.addEventListener("click", add_to_list);
+  button.addEventListener("click", addTask);
 
   input.className = "input_task";
 
@@ -41,7 +41,7 @@ function add_to_list () {
   let div_input = document.createElement("div");
   let time_div = "time_div_" + Date.now();
   div_input.setAttribute("id", time_div);
-  let task_input = document.querySelector("input").value;
-
+  div_input.innerHTML = document.querySelector("input").value;
+  document.querySelector("div.to_do").appendChild(div_input);
 }
-*/
+
