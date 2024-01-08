@@ -43,5 +43,36 @@ function add_to_list () {
   div_input.setAttribute("id", time_div);
   div_input.innerHTML = document.querySelector("input").value;
   document.querySelector("div.to_do").appendChild(div_input);
-}
+}*/
 
+
+let task_title = document.getElementsById('todo');
+let task_date = document.getElementById('todo_date');
+let task_description = document.getElementById('todo_description');
+
+function add_to_list () {
+    let new_task = {
+        id: `${task_title.value.join("-")}-${Date.now()}`,
+        title: task_title.value,
+        date: task_date.value,
+        description: task_description.value,
+        datecrea: Date.now()
+    };
+
+    new_task.forEach(({id, title, date, description, datecrea}) => 
+       (task_to_do.innerHTML  += `
+            <li class="tasks id="${id}">
+                <p>${datecrea}</p>
+                <p>${title}</p>
+                <p><span>À faire pour le:</span>${date}</p>
+                <p>${description}</p>
+                <button class="edit-btn"></button>
+                <button class="delete-btn"></button>
+            </li>`
+        )
+    ); 
+};
+
+document.querySelector(".edit-btn").addEventListener('click', () => {
+
+})
