@@ -97,13 +97,29 @@ deleteBtn.addEventListener("click", () => {
 });
 
 // reminder 
-let task_remind = task_date.value
 function reminder (task_remind) {
-   let now = new Date()
-   let two_week_before = new Date(task_remind.getTime()-(1000*60*60*24*14));
-   let time = two_week_before.getTime() - now.getTime();
-   
-   
-   setTimeout(function(){ alert(`Still two weeks to do this task !`)}, time);
+  let task_remind = task_date.value 
+  let now = new Date()
+  let time = task_remind.getTime() - now.getTime();
+  
+  setTimeout(function(){ 
+       if (time/(1000*60*60*24) < 24) {
+         alert(`Still ${time/(1000*60*60*24)} days to do the task!`)  
+       } else if (time/(1000*60*60*24) > 24){
+           alert(`Still ${time/(1000*60*60*24*7)} weeks to do the task!`) 
+       }
+   }, time);
 };
 reminder(task_remind);
+
+// classifier un élément comme urgent → voir ou le positionner 
+function important_task (){
+   let check = document.createElement('input');
+   check.type = "radio";
+   if (check.checked === true) {
+       check.classList.toggle('important');
+   } 
+
+   const important = document.querySelector('.important');
+   task_to_do.insertBefore(important, task_to_do.firstChild)
+}
