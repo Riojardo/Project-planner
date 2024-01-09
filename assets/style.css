@@ -1,1 +1,150 @@
-/*# sourceMappingURL=style.css.map */
+@import url("https://fonts.googleapis.com/css2?family=Inter&family=Lato&display=swap");
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.list_project {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  gap: 6px;
+  font-family: "Inter", sans-serif;
+}
+
+.column_list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 32%;
+  background: rgb(38, 38, 38);
+  border-radius: 8px;
+}
+
+.tasks {
+  color: #fff;
+  display: flex;
+  flex-flow: column wrap;
+  width: 90%;
+  margin: 0.5rem auto 0.5rem auto;
+  padding: 0.5rem;
+  border-radius: 16px;
+  gap: 5px;
+}
+.tasks_move {
+  position: relative;
+  left: 58%;
+  margin: 0.5rem;
+  font-size: 12px;
+}
+.tasks_crea {
+  opacity: 0.8;
+}
+.tasks_title {
+  font-size: 20px;
+  font-weight: 600;
+}
+.tasks_descr {
+  width: 100%;
+  text-align: justify;
+  font-size: 15px;
+  opacity: 0.8;
+}
+.tasks_donefor {
+  border-top: 1px solid #fff;
+  font-size: 15px;
+  padding-top: 0.5rem;
+}
+
+.to_do .tasks {
+  background-color: #ffa54d;
+}
+
+.doing .tasks {
+  background-color: #fffe4d;
+}
+
+.done .tasks {
+  background-color: #8fce00;
+}
+.done .tasks_title {
+  text-decoration: line-through;
+}
+
+.btn {
+  background: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  font-weight: 600;
+  margin: 1vh auto;
+  width: 20%;
+}
+
+.create_project {
+  margin: 3vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  gap: 1rem;
+}
+.create_project h1 {
+  font-size: 25px;
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.input_task {
+  width: 40vh;
+}
+
+.input_description {
+  width: 40vh;
+}/*# sourceMappingURL=style.css.map */
