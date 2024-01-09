@@ -28,12 +28,12 @@ function create_Project() {
   function create_task() {
     let task_Project = document.querySelector("section.create_project");
     let button = document.createElement("button"); 
-    button.className = "button_task";
+    button.className = "button_task btn";
     button.type = "button";
     button.textContent = "Show description";
     button.addEventListener("click", Show_description);
     let button_validate = document.createElement("button");
-    button_validate.className = "button_validate";
+    button_validate.className = "button_validate btn";
     button_validate.type = "button";
     button_validate.textContent = "Validate";
     button_validate.addEventListener("click", add_Task);
@@ -59,8 +59,8 @@ function create_Project() {
     input_date.max = date_Min.setFullYear(currentDate.getFullYear() + 5);
     input_date.style.display = "none";
   
-    input_title.className = "input_task";
-    input_description.className = "input_description"; 
+    input_title.className = "input_task input";
+    input_description.className = "input_description input"; 
     input_date.className ="input_date";
   
     
@@ -145,8 +145,8 @@ function create_Project() {
             <p class="tasks_title">${title}</p>
             <p class="tasks_descr">${description}</p>
             <p class="tasks_donefor">Due date fixed for : ${date}</p>
-            <button class="edit-btn btn">Edit</button>
-            <button class="delete-btn btn">Delete</button>
+            <button class="edit-btn btn-task">Edit</button>
+            <button class="delete-btn btn-task">Delete</button>
         </div>`
       )
   ); 
