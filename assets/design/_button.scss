@@ -1,27 +1,29 @@
 // btn de la tâche
 .btn-task {
-    background: transparent;
-    border: 1px solid $txt-color;
-    color: $txt-color;
-    font-weight: 600;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
     margin:1vh auto;
-    width: 20%;
-    cursor: pointer;
+    button {
+        background: transparent;
+        color: $txt-color;
+        border: 2px solid $txt-color;
+        cursor: pointer;
+        font-weight: 600;
+        padding: 0.25rem;
+    }
 }
-
-// edit
 .edit-btn {
     &:hover {
         background-color: blue;
     }
 }
-
-// supprimer
 .delete-btn {
     &:hover {
         background-color: red;
     }
 }
+
 
 // btn validé toute les info de la tâche
 .btn {

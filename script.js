@@ -145,35 +145,64 @@ function create_Project() {
             <p class="tasks_title">${title}</p>
             <p class="tasks_descr">${description}</p>
             <p class="tasks_donefor">Due date fixed for : ${date}</p>
-            <button class="edit-btn btn-task">Edit</button>
-            <button class="delete-btn btn-task">Delete</button>
+            <div class="btn-task">
+                <button type="submit" class="edit-btn">Edit</button>
+                <button type="submit" class="delete-btn">Delete</button>
+            </div>
         </div>`
       )
   ); 
   };
   
   // edit btn
-  let editBtn = document.querySelector(".edit-btn")
-  editBtn.addEventListener('click', () => {
-  let edit_task = getElementById("edit");
-  edit_task.contentEditable = true;
+  function stopEditingOnEnter(e, element) {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        element.blur();
+    }
+  }
+
+  let editBtns = document.querySelectorAll('.edit-btn');
+  editBtns.forEach(editBtn => {
+      editBtn.addEventListener('click', function() {
+        let taskToEdit = this.parentElement.parentElement;
+        let titleToEdit = taskToEdit.querySelector('.tasks_title');
+        let descriptionToEdit = taskToEdit.querySelector('.tasks_descr');
+  
+        titleToEdit.contentEditable = true;
+        titleToEdit.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+  
+        descriptionToEdit.contentEditable = true;
+        descriptionToEdit.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+
+        titleToEdit.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter') {
+              e.preventDefault();
+              titleToEdit.contentEditable = false;
+              titleToEdit.style.backgroundColor = "";
+          }
+        });
+
+        descriptionToEdit.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter') {
+              e.preventDefault();
+              descriptionToEdit.contentEditable = false;
+              descriptionToEdit.style.backgroundColor = "";
+          }
+        });
+      });
   });
   
-  document.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter'){
-      edit_task.contentEditable = false;
-  }
-  })
   
   // delete btn
-  let deleteBtn = document.querySelector('.delete-btn')
-  deleteBtn.addEventListener("click", () => {
-  const index = new_task.indexOf();
-  if (index !== -1){
-      new_task.slice(index, 1);
-      document.querySelector('.tasks').remove();
-  }
-  });
+//   let deleteBtn = document.querySelectorAll('delete-btn')
+//   deleteBtn.addEventListener("click", () => {
+//   const index = new_task.indexOf();
+//   if (index !== -1){
+//       new_task.slice(index, 1);
+//       document.querySelector('.tasks').remove();
+//   }
+//   });
   
     input_title.value = "";
     input_description.value = "";

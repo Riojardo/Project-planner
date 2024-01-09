@@ -120,13 +120,18 @@ table {
 }
 
 .btn-task {
-  background: transparent;
-  border: 1px solid #fff;
-  color: #fff;
-  font-weight: 600;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
   margin: 1vh auto;
-  width: 20%;
+}
+.btn-task button {
+  background: transparent;
+  color: #fff;
+  border: 2px solid #fff;
   cursor: pointer;
+  font-weight: 600;
+  padding: 0.25rem;
 }
 
 .edit-btn:hover {
