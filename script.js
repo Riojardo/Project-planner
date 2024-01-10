@@ -296,7 +296,7 @@ function recreate_list() {
     taskDiv.id = id;
     taskDiv.draggable = true;
     taskDiv.addEventListener("dragstart", drag);
-    
+
     taskDiv.innerHTML = `
     <label> Urgent ! <input type ="checkbox" class = "urgent"><label>
           <p><span>Task created on: </span>${datecrea}</p>
@@ -336,6 +336,7 @@ function save_storage() {
   let json_new_task = JSON.stringify(new_task);
   localStorage.setItem("array", json_new_task);
 
+
 }
 
 function recup_storage() {
@@ -352,10 +353,10 @@ function recup_storage() {
 }
 
 
+
 create_Project();
 create_task();
 refresh_all();
 setInterval(change_box,1000)
 recup_storage();
 recreate_list();
-
