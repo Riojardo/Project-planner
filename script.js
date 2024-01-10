@@ -198,55 +198,8 @@ function add_Task() {
   
     save_storage();
   }
-  
-
-  // edit btn
-  let editBtns = document.querySelectorAll('.edit-btn');
-  editBtns.forEach(editBtn => {
-      editBtn.addEventListener('click', function() {
-        let taskToEdit = this.parentElement.parentElement;
-        let titleToEdit = taskToEdit.querySelector('.tasks_title');
-        let descriptionToEdit = taskToEdit.querySelector('.tasks_descr');
-  
-        titleToEdit.contentEditable = true;
-        titleToEdit.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
-  
-        descriptionToEdit.contentEditable = true;
-        descriptionToEdit.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
-
-        titleToEdit.addEventListener('keydown', function(e) {
-          if (e.key === 'Enter') {
-              e.preventDefault();
-              titleToEdit.contentEditable = false;
-              titleToEdit.style.backgroundColor = "";
-          }
-        });
-
-        descriptionToEdit.addEventListener('keydown', function(e) {
-          if (e.key === 'Enter') {
-              e.preventDefault();
-              descriptionToEdit.contentEditable = false;
-              descriptionToEdit.style.backgroundColor = "";
-          }
-        });
-      });
-  });
-
-  // delete btn
-  let deleteBtns = document.querySelectorAll('.delete-btn');
-  deleteBtns.forEach(deleteBtn => {
-      deleteBtn.addEventListener('click', function() {
-          const taskId = this.closest('.tasks').id;
-          const index = new_task.findIndex(task => task.id === taskId);
-          if (index !== -1) {
-              new_task.splice(index, 1);
-              document.getElementById(taskId).remove();
-              save_storage();
-          }
-      });
-  });
-  
-
+  editItems();
+  deleteItems();
 
   input_title.value = "";
   input_description.value = "";
@@ -322,14 +275,18 @@ function recreate_list() {
     taskDiv.addEventListener("dragstart", drag);
 
     taskDiv.innerHTML = `
-    <label> Urgent ! <input type ="checkbox" class = "urgent"><label>
-          <p><span>Task created on: </span>${datecrea}</p>
-          <p>${title}</p>
-          <p>${description}</p>
-          <p><span>Due date fixed for: </span>${date}</p>
-          <button class="edit-btn">Edit</button>
-          <button class="delete-btn">Delete</button>
-      `;
+    <div class="tasks" id="${id}" draggable="true" ondragstart="drag(event)">
+          <label class="tasks_move"> Urgent ! <input type ="checkbox" class = "urgent"></label>
+          <p class"tasks_crea"><span>Task create the : </span>${datecrea}</p>
+          <p class="tasks_title">${title}</p>
+          <p class="tasks_descr">${description}</p>
+          <p class="tasks_donefor"><span>Due date fixed for : </span>${date}</p>
+          <div class="btn-task">
+              <button class="edit-btn">Edit</button>
+              <button class="delete-btn">Delete</button>
+          </div>
+       </div>`;
+
 
     taskContainer.appendChild(taskDiv);
   });
@@ -352,6 +309,8 @@ function recreate_list() {
       }
       save_storage();
     });
+    editItems();
+    deleteItems();
   });
 }
 
@@ -376,7 +335,54 @@ function recup_storage() {
 
 }
 
+  // edit btn
+  function editItems () {
+  let editBtns = document.querySelectorAll('.edit-btn');
+  editBtns.forEach(editBtn => {
+      editBtn.addEventListener('click', function() {
+        let taskToEdit = this.parentElement.parentElement;
+        let titleToEdit = taskToEdit.querySelector('.tasks_title');
+        let descriptionToEdit = taskToEdit.querySelector('.tasks_descr');
+  
+        titleToEdit.contentEditable = true;
+        titleToEdit.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+  
+        descriptionToEdit.contentEditable = true;
+        descriptionToEdit.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
 
+        titleToEdit.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter') {
+              e.preventDefault();
+              titleToEdit.contentEditable = false;
+              titleToEdit.style.backgroundColor = "";
+          }
+        });
+
+        descriptionToEdit.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter') {
+              e.preventDefault();
+              descriptionToEdit.contentEditable = false;
+              descriptionToEdit.style.backgroundColor = "";
+          }
+        });
+      });
+  });
+}
+  // delete btn
+function deleteItems () {
+  let deleteBtns = document.querySelectorAll('.delete-btn');
+  deleteBtns.forEach(deleteBtn => {
+      deleteBtn.addEventListener('click', function() {
+          const taskId = this.closest('.tasks').id;
+          const index = new_task.findIndex(task => task.id === taskId);
+          if (index !== -1) {
+              new_task.splice(index, 1);
+              document.getElementById(taskId).remove();
+              save_storage();
+          }
+      });
+  });
+}
 
 create_Project();
 create_task();
