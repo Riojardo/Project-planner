@@ -4,18 +4,16 @@ function drag(ev) {
 function onDragEnter(event) {
   event.preventDefault();
 }
-
 function onDragOver(event) {
   event.preventDefault();
 }
-
 function onDrop(event) {
   event.preventDefault();
   let data = event.dataTransfer.getData("text");
   let draggedElement = document.getElementById(data);
   event.target.appendChild(draggedElement);
+  
 }
-
 function create_Project() {
   let task_Project = document.createElement("section");
   task_Project.className = "create_project";
@@ -168,8 +166,12 @@ function add_Task() {
 
     let button_task = document.querySelector(".button_task");
     button_task.style.display = "block";
+
+    let task_to_do = document.querySelector(".to_do");
+    let to_do = "to_do"
     
     new_task.push({
+        box: to_do,
         id: input_title.value + "-" + id_date,
         title: input_title.value,
         date: date.value,
@@ -177,22 +179,20 @@ function add_Task() {
         datecrea: formatted_Date,
     });
 
-    let task_to_do = document.querySelector(".to_do");
+    let created_task = new_task[new_task.length - 1];
 
-    new_task.forEach(
-      ({ id, title, date, description, datecrea }) =>
-        (task_to_do.innerHTML += `
-        
-   <div class="tasks" id="${id}" draggable="true" ondragstart="drag(event)">
-        <label> Urgent ! <input type ="checkbox" class = "urgent"><label>
-            <p><span>Task create the : </span>${datecrea}</p>
-            <p>${title}</p>
-            <p>${description}</p>
-            <p><span>Due date fixed for : </span>${date}</p>
-            <button class="edit-btn">Edit</button>
-            <button class="delete-btn">Delete</button>
-        </div>`)
-    );
+    task_to_do.innerHTML += `
+       <div class="tasks" id="${created_task.id}" draggable="true" ondragstart="drag(event)">
+          <label> Urgent ! <input type ="checkbox" class = "urgent"><label>
+          <p><span>Task create the : </span>${created_task.datecrea}</p>
+          <p>${created_task.title}</p>
+          <p>${created_task.description}</p>
+          <p><span>Due date fixed for : </span>${created_task.date}</p>
+          <button class="edit-btn">Edit</button>
+          <button class="delete-btn">Delete</button>
+       </div>`;
+    
+  
     save_storage();
   }
   
@@ -223,6 +223,31 @@ function add_Task() {
   });
   
 
+
+  input_title.value = "";
+  input_description.value = "";
+}
+
+function change_box() {
+  let tasks = document.querySelectorAll(".tasks");
+  let to_do_div = document.querySelector(".to_do");
+  let doing_div = document.querySelector(".doing");
+  let done_div = document.querySelector(".done");
+
+  tasks.forEach(taskDiv => {
+      let taskID = taskDiv.id;
+      let taskIndex = new_task.findIndex(task => task.id === taskID);
+      if (taskIndex !== -1) {
+          let parentDiv = taskDiv.parentNode;
+          if (parentDiv === to_do_div) {
+              new_task[taskIndex].box = "to_do";
+          } else if (parentDiv === doing_div) {
+              new_task[taskIndex].box = "doing";
+          } else if (parentDiv === done_div) {
+              new_task[taskIndex].box = "done";
+          }
+      }
+  });
   let div_priority = document.querySelectorAll(".tasks");
 
   div_priority.forEach((div_priority) => {
@@ -244,142 +269,93 @@ function add_Task() {
     
   });
 
-  input_title.value = "";
-  input_description.value = "";
+  save_storage();
 }
+
 
 function recreate_list() {
-    
- 
+  let to_do = document.querySelector(".to_do");
+  let doing = document.querySelector(".doing");
+  let done = document.querySelector(".done");
+  to_do.innerHTML = "";
+  doing.innerHTML = "";
+  done.innerHTML = "";
 
+  new_task.forEach(({ id, title, date, description, datecrea, box }) => {
+    let taskContainer;
+    if (box === "to_do") {
+      taskContainer = to_do;
+    } else if (box === "doing") {
+      taskContainer = doing;
+    } else if (box === "done") {
+      taskContainer = done;
+    }
+
+    let taskDiv = document.createElement("div");
+    taskDiv.className = "tasks";
+    taskDiv.id = id;
+    taskDiv.draggable = true;
+    taskDiv.addEventListener("dragstart", drag);
+    
+    taskDiv.innerHTML = `
+    <label> Urgent ! <input type ="checkbox" class = "urgent"><label>
+          <p><span>Task created on: </span>${datecrea}</p>
+          <p>${title}</p>
+          <p>${description}</p>
+          <p><span>Due date fixed for: </span>${date}</p>
+          <button class="edit-btn">Edit</button>
+          <button class="delete-btn">Delete</button>
+      `;
+
+    taskContainer.appendChild(taskDiv);
+  });
+
+  let div_priority = document.querySelectorAll(".tasks");
+
+  div_priority.forEach((div_priority) => {
+    let urgent_label = div_priority.querySelector(".urgent");
+
+    urgent_label.addEventListener("click", function () {
+      if (urgent_label.checked) {
+        div_priority.classList.add("priority");
+        div_priority.parentNode.insertBefore(
+          div_priority,
+          div_priority.parentNode.firstElementChild
+        );
+      } else {
+        div_priority.classList.remove("priority");
+        div_priority.parentNode.appendChild(div_priority);
+      }
+      save_storage();
+    });
+  });
 }
+
+
 function save_storage() {
   let json_new_task = JSON.stringify(new_task);
   localStorage.setItem("array", json_new_task);
+
 }
 
 function recup_storage() {
-    let storage = localStorage.getItem("array");
-    let saved_input = JSON.parse(storage);
-    if (saved_input && Array.isArray(saved_input)) {
-      new_task = saved_input;
-      console.log(new_task);
-    } else {
-      console.log(new_task);
-    }
+  let storage = localStorage.getItem("array");
+  let saved_input = JSON.parse(storage);
+
+  if (saved_input && Array.isArray(saved_input)) {
+    new_task = saved_input;
+    console.log(new_task);
+  } else {
+    console.log(new_task);
   }
+
+}
+
 
 create_Project();
 create_task();
 refresh_all();
+setInterval(change_box,1000)
 recup_storage();
 recreate_list();
 
-
-
-/*
-let input_title = document.querySelector(".input_task");
-let task_description = document.querySelector(".input_description");
-let task_date = Date.now();
-            let new_task = {
-    id: `${input_title.value.join("-")}-${Date.now()}`,
-    title: input_title_title.value,
-    date: task_date.value,
-    description: task_description.value,
-    datecrea: Date.now()
-};
-
-let task_to_do = document.querySelector(".to_do")
-
-new_task.forEach(({id, title, date, description, datecrea}) => 
-   (task_to_do.innerHTML  += `
-        <li class="tasks id="${id}">
-            <p>${datecrea}</p>
-            <p>${title}</p>
-            <p><span>À faire pour le:</span>${date}</p>
-            <p>${description}</p>
-            <button class="edit-btn"></button>
-            <button class="delete-btn"></button>
-        </li>`
-    )
-); 
-};
-
-// edit btn
-let editBtn = document.querySelector(".edit-btn")
-editBtn.addEventListener('click', () => {
-let edit_task = getElementById("edit");
-edit_task.contentEditable = true;
-});
-
-document.addEventListener('keydown', (e) => {
-if (e.key === 'Enter'){
-    edit_task.contentEditable = false;
-}
-})
-
-// delete btn
-let deleteBtn = document.querySelector('.delete-btn')
-deleteBtn.addEventListener("click", () => {
-const index = new_task.indexOf();
-if (index !== -1){
-    new_task.slice(index, 1);
-    document.querySelector('.tasks').remove();
-}
-});
-
-
-
-
-// creation task
-let input_title = document.querySelector(".input_task");
-let task_description = document.querySelector(".input_description");
-let task_date = Date.now()
-
-function add_to_list () {
-    let new_task = {
-        id: `${input_title.value.join("-")}-${Date.now()}`,
-        title: input_title.value,
-        date: task_date.value,
-        description: task_description.value,
-        datecrea: Date.now()
-    };
-
-    new_task.forEach(({id, title, date, description, datecrea}) => 
-       (task_to_do.innerHTML  += `
-            <li class="tasks id="${id}">
-                <p>${datecrea}</p>
-                <p>${title}</p>
-                <p><span>À faire pour le:</span>${date}</p>
-                <p>${description}</p>
-                <button class="edit-btn"></button>
-                <button class="delete-btn"></button>
-            </li>`
-        )
-    ); 
-};
-
-// edit btn
-let editBtn = document.querySelector(".edit-btn")
-editBtn.addEventListener('click', () => {
-    let edit_task = getElementById("edit");
-    edit_task.contentEditable = true;
-});
-
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter'){
-        edit_task.contentEditable = false;
-    }
-})
-
-// delete btn
-let deleteBtn = document.querySelector('.delete-btn')
-deleteBtn.addEventListener("click", () => {
-    const index = new_task.indexOf();
-    if (index !== -1){
-        new_task.slice(index, 1);
-        document.querySelector('.tasks').remove();
-    }
-});
-
-*/
