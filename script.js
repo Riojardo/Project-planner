@@ -333,12 +333,13 @@ function recup_storage() {
     console.log(new_task);
   }
 
+  recreate_list();
 }
 
   // edit btn
-  function editItems () {
-  let editBtns = document.querySelectorAll('.edit-btn');
-  editBtns.forEach(editBtn => {
+  function editItems() {
+    let editBtns = document.querySelectorAll('.edit-btn');
+    editBtns.forEach(editBtn => {
       editBtn.addEventListener('click', function() {
         let taskToEdit = this.parentElement.parentElement;
         let titleToEdit = taskToEdit.querySelector('.tasks_title');
@@ -349,25 +350,42 @@ function recup_storage() {
   
         descriptionToEdit.contentEditable = true;
         descriptionToEdit.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
-
+  
+        titleToEdit.addEventListener('input', function() {
+          saveEditedTask(taskToEdit.id, 'title', titleToEdit.textContent);
+        });
+  
+        descriptionToEdit.addEventListener('input', function() {
+          saveEditedTask(taskToEdit.id, 'description', descriptionToEdit.textContent);
+        });
+  
         titleToEdit.addEventListener('keydown', function(e) {
           if (e.key === 'Enter') {
-              e.preventDefault();
-              titleToEdit.contentEditable = false;
-              titleToEdit.style.backgroundColor = "";
+            e.preventDefault();
+            titleToEdit.contentEditable = false;
+            titleToEdit.style.backgroundColor = "";
           }
         });
-
+  
         descriptionToEdit.addEventListener('keydown', function(e) {
           if (e.key === 'Enter') {
-              e.preventDefault();
-              descriptionToEdit.contentEditable = false;
-              descriptionToEdit.style.backgroundColor = "";
+            e.preventDefault();
+            descriptionToEdit.contentEditable = false;
+            descriptionToEdit.style.backgroundColor = "";
           }
         });
       });
-  });
-}
+    });
+  }
+  
+  function saveEditedTask(taskId, field, value) {
+    let taskIndex = new_task.findIndex(task => task.id === taskId);
+    if (taskIndex !== -1) {
+      new_task[taskIndex][field] = value;
+      save_storage();
+    }
+  }
+
   // delete btn
 function deleteItems () {
   let deleteBtns = document.querySelectorAll('.delete-btn');
