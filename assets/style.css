@@ -1,0 +1,28 @@
+section.list_project {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+div {
+  border: 1px solid;
+}
+
+div.to_do {
+  border: 5px solid;
+  width: 33%;
+  height: 100%;
+}
+
+div.doing {
+  border: 5px solid;
+  width: 100%;
+}
+
+div.done {
+  border: 5px solid;
+  width: 100%;
+}/*# sourceMappingURL=style.css.map */
