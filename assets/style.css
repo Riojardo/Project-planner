@@ -65,7 +65,7 @@ table {
   width: 30%;
   background: rgb(38, 38, 38);
   border-radius: 8px;
-  padding: 0.75rem;
+  padding: 2vh;
   margin: 2vh auto;
 }
 
@@ -117,8 +117,8 @@ table {
   text-decoration: line-through;
 }
 
-.urgent .tasks {
-  background-color: #f44336;
+.priority {
+  border: 3px dashed red;
 }
 
 .btn-task {

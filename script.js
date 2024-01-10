@@ -199,7 +199,6 @@ function add_Task() {
     save_storage();
   }
   
-
   // edit btn
   let editBtns = document.querySelectorAll('.edit-btn');
   editBtns.forEach(editBtn => {
