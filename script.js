@@ -275,7 +275,6 @@ function recreate_list() {
     taskDiv.addEventListener("dragstart", drag);
 
     taskDiv.innerHTML = `
-    <div class="tasks" id="${id}" draggable="true" ondragstart="drag(event)">
           <label class="tasks_move"> Urgent ! <input type ="checkbox" class = "urgent"></label>
           <p class"tasks_crea"><span>Task create the : </span>${datecrea}</p>
           <p class="tasks_title">${title}</p>
@@ -284,9 +283,7 @@ function recreate_list() {
           <div class="btn-task">
               <button class="edit-btn">Edit</button>
               <button class="delete-btn">Delete</button>
-          </div>
-       </div>`;
-
+          </div>`;
 
     taskContainer.appendChild(taskDiv);
   });
