@@ -28,20 +28,20 @@ function create_Project() {
   document.body.appendChild(task_Planner);
 
   let task_to_do = document.createElement("div");
-  task_to_do.className = "to_do";
+  task_to_do.className = "to_do column_list";
   task_to_do.addEventListener("dragenter", onDragEnter);
   task_to_do.addEventListener("dragover", onDragOver);
   task_to_do.addEventListener("drop", onDrop);
 
   let task_doing = document.createElement("div");
-  task_doing.className = "doing";
+  task_doing.className = "doing column_list";
   task_doing.addEventListener("dragenter", onDragEnter);
   task_doing.addEventListener("dragover", onDragOver);
   task_doing.addEventListener("drop", onDrop);
 
   let task_done = document.createElement("div");
 
-  task_done.className = "done";
+  task_done.className = "done column_list";
   task_done.addEventListener("dragenter", onDragEnter);
   task_done.addEventListener("dragover", onDragOver);
   task_done.addEventListener("drop", onDrop);
@@ -58,6 +58,7 @@ function refresh_all() {
     let done = document.querySelector(".done"); // Add a dot here
     document.querySelector(".create_project").appendChild(button);
     button.type = "button";
+    button.className = "delete-all-btn btn"
     button.innerHTML = "DELETE ALL";
     button.addEventListener("click", function () {
         new_task = [];
@@ -72,12 +73,12 @@ function create_task() {
  
   let task_Project = document.querySelector("section.create_project");
   let button = document.createElement("button");
-  button.className = "button_task";
+  button.className = "button_task btn";
   button.type = "button";
   button.textContent = "Show description";
   button.addEventListener("click", Show_description);
   let button_validate = document.createElement("button");
-  button_validate.className = "button_validate";
+  button_validate.className = "button_validate btn";
   button_validate.type = "button";
   button_validate.textContent = "Validate";
   button_validate.addEventListener("click", add_Task);
@@ -102,8 +103,8 @@ function create_task() {
   input_date.max = date_Min.setFullYear(currentDate.getFullYear() + 5);
   input_date.style.display = "none";
 
-  input_title.className = "input_task";
-  input_description.className = "input_description";
+  input_title.className = "input_task input";
+  input_description.className = "input_description input";
   input_date.className = "input_date";
 
   task_Project.appendChild(input_title);
@@ -183,13 +184,15 @@ function add_Task() {
 
     task_to_do.innerHTML += `
        <div class="tasks" id="${created_task.id}" draggable="true" ondragstart="drag(event)">
-          <label> Urgent ! <input type ="checkbox" class = "urgent"><label>
-          <p><span>Task create the : </span>${created_task.datecrea}</p>
-          <p>${created_task.title}</p>
-          <p>${created_task.description}</p>
-          <p><span>Due date fixed for : </span>${created_task.date}</p>
-          <button class="edit-btn">Edit</button>
-          <button class="delete-btn">Delete</button>
+          <label class="tasks_move"> Urgent ! <input type ="checkbox" class = "urgent"></label>
+          <p class"tasks_crea"><span>Task create the : </span>${created_task.datecrea}</p>
+          <p class="tasks_title">${created_task.title}</p>
+          <p class="tasks_descr">${created_task.description}</p>
+          <p class="tasks_donefor"><span>Due date fixed for : </span>${created_task.date}</p>
+          <div class="btn-task">
+              <button class="edit-btn">Edit</button>
+              <button class="delete-btn">Delete</button>
+          </div>
        </div>`;
     
   
@@ -198,28 +201,49 @@ function add_Task() {
   
 
   // edit btn
-  let editBtn = document.querySelector(".edit-btn");
-  editBtn.addEventListener("click", () => {
-    let edit_task = getElementById("edit");
-    edit_task.contentEditable = true;
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      edit_task.contentEditable = false;
-    }
-  });
+  let editBtns = document.querySelectorAll('.edit-btn');
+  editBtns.forEach(editBtn => {
+      editBtn.addEventListener('click', function() {
+        let taskToEdit = this.parentElement.parentElement;
+        let titleToEdit = taskToEdit.querySelector('.tasks_title');
+        let descriptionToEdit = taskToEdit.querySelector('.tasks_descr');
   
+        titleToEdit.contentEditable = true;
+        titleToEdit.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+  
+        descriptionToEdit.contentEditable = true;
+        descriptionToEdit.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+
+        titleToEdit.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter') {
+              e.preventDefault();
+              titleToEdit.contentEditable = false;
+              titleToEdit.style.backgroundColor = "";
+          }
+        });
+
+        descriptionToEdit.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter') {
+              e.preventDefault();
+              descriptionToEdit.contentEditable = false;
+              descriptionToEdit.style.backgroundColor = "";
+          }
+        });
+      });
+  });
 
   // delete btn
-  let deleteBtn = document.querySelector(".delete-btn");
-  deleteBtn.addEventListener("click", () => {
-    const index = new_task.indexOf();
-    if (index !== -1) {
-      new_task.slice(index, 1);
-      document.querySelector(".tasks").remove();
-      save_storage();
-    }
+  let deleteBtns = document.querySelectorAll('.delete-btn');
+  deleteBtns.forEach(deleteBtn => {
+      deleteBtn.addEventListener('click', function() {
+          const taskId = this.closest('.tasks').id;
+          const index = new_task.findIndex(task => task.id === taskId);
+          if (index !== -1) {
+              new_task.splice(index, 1);
+              document.getElementById(taskId).remove();
+              save_storage();
+          }
+      });
   });
   
 
