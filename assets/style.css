@@ -81,7 +81,7 @@ table {
 .tasks_move {
   display: inline;
   position: relative;
-  left: 58%;
+  left: 75%;
   margin: 0.5rem;
   font-size: 12px;
 }
@@ -105,18 +105,20 @@ table {
 }
 
 .to_do .tasks {
-  background-color: #ffa54d;
+  background-color: #ffa100;
 }
 
 .doing .tasks {
-  background-color: #fffe4d;
+  background-color: #FFD700;
 }
 
 .done .tasks {
   background-color: #8fce00;
-}
-.done .tasks_title {
   text-decoration: line-through;
+}
+
+.urgent .tasks {
+  background-color: #f44336;
 }
 
 .btn-task {

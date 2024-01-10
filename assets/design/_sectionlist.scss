@@ -29,7 +29,7 @@
     &_move {
         display: inline;
         position: relative;
-        left: 58%;
+        left: 75%;
         margin: 0.5rem;
         font-size: 12px;
     }
@@ -73,9 +73,13 @@
 .done {
     .tasks {
         background-color: $done-color;
-        &_title {
-            text-decoration: line-through;
-        }
+        text-decoration: line-through;
+    }
+}
+
+.urgent {
+    .tasks {
+        background-color: $urgent-color;
     }
 }
 
