@@ -160,6 +160,13 @@ table {
   box-shadow: 0 0;
 }
 
+.delete-all-btn {
+  background-color: rgb(255, 48, 48);
+}
+.delete-all-btn:active {
+  background-color: rgba(255, 48, 48, 0.8);
+}
+
 .create_project {
   display: flex;
   align-items: center;
@@ -178,7 +185,7 @@ table {
 .input {
   width: 40vh;
   border: none;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.4);
   transition: border-color 0.5s;
 }
 .input:focus {

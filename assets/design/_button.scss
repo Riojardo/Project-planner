@@ -42,3 +42,11 @@
     }
 }
 
+// delete all btn 
+.delete-all-btn {
+    background-color: rgb(255,48,48);
+    &:active{
+        background-color: rgba(255,48,48, 0.8);
+    }
+}
+

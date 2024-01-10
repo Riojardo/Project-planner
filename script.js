@@ -60,6 +60,7 @@ function refresh_all() {
     let done = document.querySelector(".done"); // Add a dot here
     document.querySelector(".create_project").appendChild(button);
     button.type = "button";
+    button.className = "delete-all-btn btn"
     button.innerHTML = "DELETE ALL";
     button.addEventListener("click", function () {
         new_task = [];
