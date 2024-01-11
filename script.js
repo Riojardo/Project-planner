@@ -194,7 +194,6 @@ function add_Task() {
               <button class="delete-btn">Delete</button>
           </div>
        </div>`;
-    
   
     save_storage();
   }
@@ -204,6 +203,8 @@ function add_Task() {
   input_title.value = "";
   input_description.value = "";
 }
+
+ 
 
 function change_box() {
   let tasks = document.querySelectorAll(".tasks");
@@ -274,12 +275,19 @@ function recreate_list() {
     taskDiv.draggable = true;
     taskDiv.addEventListener("dragstart", drag);
 
+      let dueDate = new Date(date);
+      let today = new Date();
+      let dayBefore = Math.ceil((dueDate - today)/(1000*60*60*24));
+
+      let dueDisplay = dayBefore <= 5 ? `${dayBefore} days remaining !`: `Date fixe for : ${date}`;
+    
+
     taskDiv.innerHTML = `
           <label class="tasks_move"> Urgent ! <input type ="checkbox" class = "urgent"></label>
           <p class"tasks_crea"><span>Task create the : </span>${datecrea}</p>
           <p class="tasks_title">${title}</p>
           <p class="tasks_descr">${description}</p>
-          <p class="tasks_donefor"><span>Due date fixed for : </span>${date}</p>
+          <p class="tasks_donefor">${dueDisplay}</p>
           <div class="btn-task">
               <button class="edit-btn">Edit</button>
               <button class="delete-btn">Delete</button>
@@ -371,6 +379,7 @@ function recup_storage() {
             descriptionToEdit.style.backgroundColor = "";
           }
         });
+
       });
     });
   }
