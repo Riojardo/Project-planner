@@ -1,0 +1,14 @@
+// color
+$black: rgb(0, 0, 0);
+$bg-list-color: rgba(38, 38, 38, 1);
+$txt-color: #fff;
+$todo-color: #ffa100;
+$doing-color:#FFD700;
+$done-color:#8fce00;
+$urgent-color: #f44336;
+
+// font 
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Lato&display=swap');
+
+$font: 'Inter', sans-serif;
+$font-title: 'Lato', sans-serif;
