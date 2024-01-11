@@ -170,6 +170,11 @@ function add_Task() {
 
     let task_to_do = document.querySelector(".to_do");
     let to_do = "to_do"
+
+    let dueDate = new Date(input_date.value);
+    let today = new Date();
+    let daysRemaining = Math.ceil((dueDate - today) / (1000 * 60 * 60 * 24));
+    let dueDisplay = dayBefore <= 5 ? `${dayBefore} days remaining !`: `Date fixe for : ${date}`;
     
     new_task.push({
         box: to_do,
@@ -178,6 +183,7 @@ function add_Task() {
         date: date.value,
         description: input_description.value,
         datecrea: formatted_Date,
+        dueDisplay: dueDisplay,
     });
 
     let created_task = new_task[new_task.length - 1];
@@ -188,7 +194,7 @@ function add_Task() {
           <p class"tasks_crea"><span>Task create the : </span>${created_task.datecrea}</p>
           <p class="tasks_title">${created_task.title}</p>
           <p class="tasks_descr">${created_task.description}</p>
-          <p class="tasks_donefor"><span>Due date fixed for : </span>${created_task.date}</p>
+          <p class="tasks_donefor">${created_task.dueDisplay}</p>
           <div class="btn-task">
               <button class="edit-btn">Edit</button>
               <button class="delete-btn">Delete</button>
