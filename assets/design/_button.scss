@@ -1,0 +1,52 @@
+// btn de la tâche
+.btn-task {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin:1vh auto;
+    button {
+        background: transparent;
+        color: $txt-color;
+        border: 2px solid $txt-color;
+        cursor: pointer;
+        font-weight: 600;
+        padding: 0.25rem;
+    }
+}
+.edit-btn {
+    &:hover {
+        background-color: blue;
+    }
+}
+.delete-btn {
+    &:hover {
+        background-color: red;
+    }
+}
+
+
+// btn validé toute les info de la tâche
+.btn {
+    padding: 0.5rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    transition: 0.3s;
+    background: transparent;
+    transform: translateY(-5%);
+    box-shadow: 0 0.5em 1em -0.2em rgba($black, 0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+    &:active{
+        transform: translateY(0%);
+        box-shadow: 0 0;
+    }
+}
+
+// delete all btn 
+.delete-all-btn {
+    background-color: rgb(255,48,48);
+    &:active{
+        background-color: rgba(255,48,48, 0.8);
+    }
+}
+

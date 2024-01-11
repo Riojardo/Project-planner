@@ -1,28 +1,199 @@
-section.list_project {
+@import url("https://fonts.googleapis.com/css2?family=Inter&family=Lato&display=swap");
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.list_project {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  gap: 6px;
+  font-family: "Inter", sans-serif;
+}
+
+.column_list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 30%;
+  background: rgb(38, 38, 38);
+  border-radius: 8px;
+  padding: 2vh;
+  margin: 2vh auto;
+}
+
+.tasks {
+  color: #fff;
+  display: flex;
+  flex-flow: column wrap;
+  width: 90%;
+  padding: 0.5rem;
+  border-radius: 16px;
+  gap: 5px;
+}
+.tasks_move {
+  display: inline;
+  position: relative;
+  left: 75%;
+  margin: 0.5rem;
+  font-size: 12px;
+}
+.tasks_crea {
+  opacity: 0.8;
+}
+.tasks_title {
+  font-size: 20px;
+  font-weight: 600;
+}
+.tasks_descr {
+  width: 100%;
+  text-align: justify;
+  font-size: 15px;
+  opacity: 0.8;
+}
+.tasks_donefor {
+  border-top: 1px solid #fff;
+  font-size: 15px;
+  padding-top: 0.5rem;
+}
+
+.to_do .tasks {
+  background-color: #ffa100;
+}
+
+.doing .tasks {
+  background-color: #FFD700;
+}
+
+.done .tasks {
+  background-color: #8fce00;
+  text-decoration: line-through;
+}
+
+.priority {
+  border: 3px dashed red;
+}
+
+.btn-task {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  align-items: stretch;
-  align-content: stretch;
+  gap: 10px;
+  margin: 1vh auto;
+}
+.btn-task button {
+  background: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 0.25rem;
 }
 
-div {
-  border: 1px solid;
+.edit-btn:hover {
+  background-color: blue;
 }
 
-div.to_do {
-  border: 5px solid;
-  width: 33%;
-  height: 100%;
+.delete-btn:hover {
+  background-color: red;
 }
 
-div.doing {
-  border: 5px solid;
-  width: 100%;
+.btn {
+  padding: 0.5rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  transition: 0.3s;
+  background: transparent;
+  transform: translateY(-5%);
+  box-shadow: 0 0.5em 1em -0.2em rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn:active {
+  transform: translateY(0%);
+  box-shadow: 0 0;
 }
 
-div.done {
-  border: 5px solid;
-  width: 100%;
+.delete-all-btn {
+  background-color: rgb(255, 48, 48);
+}
+.delete-all-btn:active {
+  background-color: rgba(255, 48, 48, 0.8);
+}
+
+.create_project {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  gap: 0.75rem;
+}
+.create_project h1 {
+  font-size: 25px;
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin: 2vh auto;
+}
+
+.input {
+  width: 40vh;
+  border: none;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.4);
+  transition: border-color 0.5s;
+}
+.input:focus {
+  border: none;
+  outline: none;
+  border-bottom: 2px solid rgb(0, 0, 0);
+}
+
+.input_date {
+  width: 40vh;
 }/*# sourceMappingURL=style.css.map */

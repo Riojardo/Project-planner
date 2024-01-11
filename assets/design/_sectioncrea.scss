@@ -1,0 +1,32 @@
+.create_project {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    gap: 0.75rem;
+    h1 {
+        font: {
+            size: 25px;
+            family: $font-title;
+            weight: 700;
+        }
+        letter-spacing: 1px;
+        margin: 2vh auto;
+    }
+}
+
+.input {
+    width: 40vh;
+    border: none;
+    border-bottom: 2px solid rgba($black, 0.4);
+    transition: border-color 0.5s;
+    &:focus {
+        border: none;
+        outline: none;
+        border-bottom: 2px solid $black;
+    }
+}
+
+.input_date {
+    width: 40vh;
+}
